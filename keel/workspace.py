@@ -9,6 +9,7 @@ import subprocess
 import textwrap
 import hashlib
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 MAX_TOOL_OUTPUT = 4000
@@ -18,6 +19,10 @@ MAX_HISTORY = 12000
 # "navigation pack" first.
 DOC_NAMES = ("AGENTS.md", "README.md", "pyproject.toml", "package.json")
 IGNORED_PATH_NAMES = {".git", ".keel", "__pycache__", ".pytest_cache", ".ruff_cache", ".venv", "venv"}
+
+
+def now():
+    return datetime.now(timezone.utc).isoformat()
 
 
 def clip(text, limit=MAX_TOOL_OUTPUT):
