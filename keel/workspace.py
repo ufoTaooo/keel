@@ -32,6 +32,17 @@ def clip(text, limit=MAX_TOOL_OUTPUT):
     return text[:limit] + f"\n...[truncated {len(text) - limit} chars]"
 
 
+def middle(text, limit):
+    text = str(text).replace("\n", " ")
+    if len(text) <= limit:
+        return text
+    if limit <= 3:
+        return text[:limit]
+    left = (limit - 3) // 2
+    right = limit - 3 - left
+    return text[:left] + "..." + text[-right:]
+
+
 class WorkspaceContext:
     def __init__(self, cwd, repo_root, branch, default_branch, status, recent_commits, project_docs):
         self.cwd = cwd
