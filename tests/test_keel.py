@@ -1718,3 +1718,21 @@ def test_module_execution_help_works():
 
     assert result.returncode == 0
     assert "usage:" in result.stdout.lower()
+
+
+def test_reviewer_skeleton_docs_exist():
+    review_pack = Path("docs/review-pack/README.md")
+    architecture = Path("docs/architecture/agent-harness-v1-overview.md")
+
+    assert review_pack.exists()
+    assert architecture.exists()
+
+    review_text = review_pack.read_text(encoding="utf-8")
+    assert "Project pitch" in review_text
+    assert "Architecture map" in review_text
+    assert "Benchmark evidence" in review_text
+    assert "Sample run artifact list" in review_text
+
+    architecture_text = architecture.read_text(encoding="utf-8")
+    assert "Agent Harness v1" in architecture_text
+    assert "task state" in architecture_text.lower()
